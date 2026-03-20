@@ -20,7 +20,7 @@ export default async function AuthPage() {
           src="/login-bg.png"
           alt=""
           fill
-          className="object-contain"
+          className="object-contain object-[50%_40%] scale-200"
           priority
         />
       </div>
