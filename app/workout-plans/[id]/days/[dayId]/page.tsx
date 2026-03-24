@@ -54,8 +54,13 @@ export default async function WorkoutDayPage({
     estimatedDurationInSeconds,
     exercises,
     sessions,
+    isRest,
     coverImageUrl,
   } = workoutDayData.data;
+
+  if (isRest) {
+    redirect(`/workout-plans/${workoutPlanId}`);
+  }
 
   const durationInMinutes = Math.ceil(estimatedDurationInSeconds / 60);
 
