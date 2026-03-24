@@ -31,7 +31,6 @@ export const customFetch = async <T>(
   options: RequestInit,
 ): Promise<T> => {
   const requestUrl = getUrl(url);
-  console.log("🚀 Chamando URL:", requestUrl);
   const requestHeaders = await getHeaders(options.headers);
 
   const requestInit: RequestInit = {
