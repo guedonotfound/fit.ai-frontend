@@ -72,7 +72,7 @@ export default async function WorkoutDayPage({
   const hasCompletedSession = !!completedSession;
 
   return (
-    <div className="flex min-h-svh flex-col bg-background pb-24 relative">
+    <div className="flex min-h-svh flex-col bg-background pb-24">
       <div className="flex items-center justify-between px-5 py-4">
         <BackButton />
         <h1 className="font-heading text-lg font-semibold text-foreground">
@@ -171,18 +171,22 @@ export default async function WorkoutDayPage({
       </div>
 
       {!hasInProgressSession && !hasCompletedSession && (
-        <UpsertWorkoutSessionButton
-          workoutPlanId={workoutPlanId}
-          workoutDayId={dayId}
-        />
+        <div className="p-5">
+          <UpsertWorkoutSessionButton
+            workoutPlanId={workoutPlanId}
+            workoutDayId={dayId}
+          />
+        </div>
       )}
 
       {hasInProgressSession && !hasCompletedSession && (
-        <UpsertWorkoutSessionButton
-          workoutPlanId={workoutPlanId}
-          workoutDayId={dayId}
-          workoutSessionId={inProgressSession.id}
-        />
+        <div className="p-5">
+          <UpsertWorkoutSessionButton
+            workoutPlanId={workoutPlanId}
+            workoutDayId={dayId}
+            workoutSessionId={inProgressSession.id}
+          />
+        </div>
       )}
 
       <BottomNav activePage="calendar" />
