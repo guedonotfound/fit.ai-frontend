@@ -2,6 +2,7 @@
 
 import {
   startWorkoutSession,
+  updateWorkoutExerciseWeight,
   updateWorkoutSession,
 } from "@/app/_lib/api/fetch-generated";
 import { revalidatePath } from "next/cache";
@@ -22,5 +23,20 @@ export async function completeWorkoutAction(
   await updateWorkoutSession(workoutPlanId, workoutDayId, workoutSessionId, {
     completedAt: new Date().toISOString(),
   });
+  revalidatePath(`/workout-plans/${workoutPlanId}/days/${workoutDayId}`);
+}
+
+export async function updateWorkoutExerciseWeightAction(
+  workoutExerciseId: string,
+  workoutDayId: string,
+  workoutPlanId: string,
+  newWeight: number,
+) {
+  await updateWorkoutExerciseWeight(
+    workoutPlanId,
+    workoutDayId,
+    workoutExerciseId,
+    { weightInGrams: newWeight },
+  );
   revalidatePath(`/workout-plans/${workoutPlanId}/days/${workoutDayId}`);
 }

@@ -257,7 +257,8 @@ export type GetWorkoutDay200 = {
   id: string;
   name: string;
   isRest: boolean;
-  coverImageUrl?: string;
+  /** @nullable */
+  coverImageUrl?: string | null;
   estimatedDurationInSeconds: number;
   weekDay: GetWorkoutDay200WeekDay;
   exercises: GetWorkoutDay200ExercisesItem[];
@@ -337,6 +338,35 @@ export type UpdateWorkoutSession422 = {
 };
 
 export type UpdateWorkoutSession500 = {
+  error: string;
+  code: string;
+};
+
+export type UpdateWorkoutExerciseWeightBody = {
+  weightInGrams: number;
+};
+
+export type UpdateWorkoutExerciseWeight200 = {
+  id: string;
+  weightInGrams: number;
+};
+
+export type UpdateWorkoutExerciseWeight401 = {
+  error: string;
+  code: string;
+};
+
+export type UpdateWorkoutExerciseWeight404 = {
+  error: string;
+  code: string;
+};
+
+export type UpdateWorkoutExerciseWeight422 = {
+  error: string;
+  code: string;
+};
+
+export type UpdateWorkoutExerciseWeight500 = {
   error: string;
   code: string;
 };
@@ -898,6 +928,81 @@ export const updateWorkoutSession = async (
       method: "PATCH",
       headers: { "Content-Type": "application/json", ...options?.headers },
       body: JSON.stringify(updateWorkoutSessionBody),
+    },
+  );
+};
+
+/**
+ * @summary Update a workout exercise weight
+ */
+export type updateWorkoutExerciseWeightResponse200 = {
+  data: UpdateWorkoutExerciseWeight200;
+  status: 200;
+};
+
+export type updateWorkoutExerciseWeightResponse401 = {
+  data: UpdateWorkoutExerciseWeight401;
+  status: 401;
+};
+
+export type updateWorkoutExerciseWeightResponse404 = {
+  data: UpdateWorkoutExerciseWeight404;
+  status: 404;
+};
+
+export type updateWorkoutExerciseWeightResponse422 = {
+  data: UpdateWorkoutExerciseWeight422;
+  status: 422;
+};
+
+export type updateWorkoutExerciseWeightResponse500 = {
+  data: UpdateWorkoutExerciseWeight500;
+  status: 500;
+};
+
+export type updateWorkoutExerciseWeightResponseSuccess =
+  updateWorkoutExerciseWeightResponse200 & {
+    headers: Headers;
+  };
+export type updateWorkoutExerciseWeightResponseError = (
+  | updateWorkoutExerciseWeightResponse401
+  | updateWorkoutExerciseWeightResponse404
+  | updateWorkoutExerciseWeightResponse422
+  | updateWorkoutExerciseWeightResponse500
+) & {
+  headers: Headers;
+};
+
+export type updateWorkoutExerciseWeightResponse =
+  | updateWorkoutExerciseWeightResponseSuccess
+  | updateWorkoutExerciseWeightResponseError;
+
+export const getUpdateWorkoutExerciseWeightUrl = (
+  workoutPlanId: string,
+  workoutDayId: string,
+  workoutExerciseId: string,
+) => {
+  return `/workout-plans/${workoutPlanId}/days/${workoutDayId}/workoutExercises/${workoutExerciseId}`;
+};
+
+export const updateWorkoutExerciseWeight = async (
+  workoutPlanId: string,
+  workoutDayId: string,
+  workoutExerciseId: string,
+  updateWorkoutExerciseWeightBody: UpdateWorkoutExerciseWeightBody,
+  options?: RequestInit,
+): Promise<updateWorkoutExerciseWeightResponse> => {
+  return customFetch<updateWorkoutExerciseWeightResponse>(
+    getUpdateWorkoutExerciseWeightUrl(
+      workoutPlanId,
+      workoutDayId,
+      workoutExerciseId,
+    ),
+    {
+      ...options,
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", ...options?.headers },
+      body: JSON.stringify(updateWorkoutExerciseWeightBody),
     },
   );
 };
