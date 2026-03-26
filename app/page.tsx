@@ -9,6 +9,7 @@ import { Flame } from "lucide-react";
 import { BottomNav } from "./_components/bottom-nav";
 import { ConsistencyTracker } from "./_components/consistency-tracker";
 import { WorkoutDayCard } from "./_components/workout-day-card";
+import { RestDayCard } from "./_components/rest-day-card";
 
 export default async function Home() {
   const session = await authClient.getSession({
@@ -113,19 +114,31 @@ export default async function Home() {
             </button>
           </div>
 
-          <Link
-            href={`/workout-plans/${todayWorkoutDay.workoutPlanId}/days/${todayWorkoutDay.id}`}
-          >
-            <WorkoutDayCard
-              name={todayWorkoutDay.name}
-              weekDay={todayWorkoutDay.weekDay}
-              estimatedDurationInSeconds={
-                todayWorkoutDay.estimatedDurationInSeconds
-              }
-              exercisesCount={todayWorkoutDay.exercisesCount}
-              coverImageUrl={todayWorkoutDay.coverImageUrl}
-            />
-          </Link>
+          {todayWorkoutDay.isRest ? (
+            <Link
+              key={todayWorkoutDay.id}
+              href={`/workout-plans/${todayWorkoutDay.workoutPlanId}/days/${todayWorkoutDay.id}`}
+            >
+              <RestDayCard
+                key={todayWorkoutDay.id}
+                weekDay={todayWorkoutDay.weekDay}
+              />
+            </Link>
+          ) : (
+            <Link
+              href={`/workout-plans/${todayWorkoutDay.workoutPlanId}/days/${todayWorkoutDay.id}`}
+            >
+              <WorkoutDayCard
+                name={todayWorkoutDay.name}
+                weekDay={todayWorkoutDay.weekDay}
+                estimatedDurationInSeconds={
+                  todayWorkoutDay.estimatedDurationInSeconds
+                }
+                exercisesCount={todayWorkoutDay.exercisesCount}
+                coverImageUrl={todayWorkoutDay.coverImageUrl}
+              />
+            </Link>
+          )}
         </div>
       )}
 

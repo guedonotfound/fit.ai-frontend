@@ -4,7 +4,7 @@ import { Goal } from "lucide-react";
 import { headers } from "next/headers";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { RestDayCard } from "./_components/rest-day-card";
+import { RestDayCard } from "../../_components/rest-day-card";
 import { WorkoutDayCard } from "@/app/_components/workout-day-card";
 import Link from "next/link";
 import { BottomNav } from "@/app/_components/bottom-nav";
