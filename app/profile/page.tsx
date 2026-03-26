@@ -3,7 +3,7 @@ import { authClient } from "../_lib/auth-client";
 import { headers } from "next/headers";
 import { getUserTrainData } from "../_lib/api/fetch-generated";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { BicepsFlexed, CalendarDays, Ruler, User, Weight } from "lucide-react";
+import { BicepsFlexed, CalendarDays, Ruler, Weight } from "lucide-react";
 import { LogoutButton } from "./_components/logout-button";
 import { BottomNav } from "../_components/bottom-nav";
 import GoalCard from "./_components/goal-card";
