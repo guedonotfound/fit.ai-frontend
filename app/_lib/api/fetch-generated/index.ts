@@ -26,13 +26,13 @@ export type ListWorkouPlans200ItemWorkoutDaysItemWeekDay =
   (typeof ListWorkouPlans200ItemWorkoutDaysItemWeekDay)[keyof typeof ListWorkouPlans200ItemWorkoutDaysItemWeekDay];
 
 export const ListWorkouPlans200ItemWorkoutDaysItemWeekDay = {
+  SUNDAY: "SUNDAY",
   MONDAY: "MONDAY",
   TUESDAY: "TUESDAY",
   WEDNESDAY: "WEDNESDAY",
   THURSDAY: "THURSDAY",
   FRIDAY: "FRIDAY",
   SATURDAY: "SATURDAY",
-  SUNDAY: "SUNDAY",
 } as const;
 
 export type ListWorkouPlans200ItemWorkoutDaysItemExercisesItem = {
@@ -75,13 +75,13 @@ export type CreateWorkoutPlanBodyWorkoutDaysItemWeekDay =
   (typeof CreateWorkoutPlanBodyWorkoutDaysItemWeekDay)[keyof typeof CreateWorkoutPlanBodyWorkoutDaysItemWeekDay];
 
 export const CreateWorkoutPlanBodyWorkoutDaysItemWeekDay = {
+  SUNDAY: "SUNDAY",
   MONDAY: "MONDAY",
   TUESDAY: "TUESDAY",
   WEDNESDAY: "WEDNESDAY",
   THURSDAY: "THURSDAY",
   FRIDAY: "FRIDAY",
   SATURDAY: "SATURDAY",
-  SUNDAY: "SUNDAY",
 } as const;
 
 export type CreateWorkoutPlanBodyWorkoutDaysItemExercisesItem = {
@@ -117,13 +117,13 @@ export type CreateWorkoutPlan201WorkoutDaysItemWeekDay =
   (typeof CreateWorkoutPlan201WorkoutDaysItemWeekDay)[keyof typeof CreateWorkoutPlan201WorkoutDaysItemWeekDay];
 
 export const CreateWorkoutPlan201WorkoutDaysItemWeekDay = {
+  SUNDAY: "SUNDAY",
   MONDAY: "MONDAY",
   TUESDAY: "TUESDAY",
   WEDNESDAY: "WEDNESDAY",
   THURSDAY: "THURSDAY",
   FRIDAY: "FRIDAY",
   SATURDAY: "SATURDAY",
-  SUNDAY: "SUNDAY",
 } as const;
 
 export type CreateWorkoutPlan201WorkoutDaysItemExercisesItem = {
@@ -180,13 +180,13 @@ export type GetWorkoutPlan200WorkoutDaysItemWeekDay =
   (typeof GetWorkoutPlan200WorkoutDaysItemWeekDay)[keyof typeof GetWorkoutPlan200WorkoutDaysItemWeekDay];
 
 export const GetWorkoutPlan200WorkoutDaysItemWeekDay = {
+  SUNDAY: "SUNDAY",
   MONDAY: "MONDAY",
   TUESDAY: "TUESDAY",
   WEDNESDAY: "WEDNESDAY",
   THURSDAY: "THURSDAY",
   FRIDAY: "FRIDAY",
   SATURDAY: "SATURDAY",
-  SUNDAY: "SUNDAY",
 } as const;
 
 export type GetWorkoutPlan200WorkoutDaysItem = {
@@ -224,13 +224,13 @@ export type GetWorkoutDay200WeekDay =
   (typeof GetWorkoutDay200WeekDay)[keyof typeof GetWorkoutDay200WeekDay];
 
 export const GetWorkoutDay200WeekDay = {
+  SUNDAY: "SUNDAY",
   MONDAY: "MONDAY",
   TUESDAY: "TUESDAY",
   WEDNESDAY: "WEDNESDAY",
   THURSDAY: "THURSDAY",
   FRIDAY: "FRIDAY",
   SATURDAY: "SATURDAY",
-  SUNDAY: "SUNDAY",
 } as const;
 
 export type GetWorkoutDay200ExercisesItem = {
@@ -429,6 +429,7 @@ export type GetUserTrainData200 = {
    * @maximum 100
    */
   bodyFatPercentage: number;
+  mainGoal: string;
 } | null;
 
 export type GetUserTrainData401 = {
@@ -468,6 +469,7 @@ export type UpsertUserTrainData200 = {
    * @maximum 100
    */
   bodyFatPercentage: number;
+  mainGoal: string;
 };
 
 export type UpsertUserTrainData401 = {
@@ -484,13 +486,13 @@ export type GetHomeData200TodayWorkoutDayWeekDay =
   (typeof GetHomeData200TodayWorkoutDayWeekDay)[keyof typeof GetHomeData200TodayWorkoutDayWeekDay];
 
 export const GetHomeData200TodayWorkoutDayWeekDay = {
+  SUNDAY: "SUNDAY",
   MONDAY: "MONDAY",
   TUESDAY: "TUESDAY",
   WEDNESDAY: "WEDNESDAY",
   THURSDAY: "THURSDAY",
   FRIDAY: "FRIDAY",
   SATURDAY: "SATURDAY",
-  SUNDAY: "SUNDAY",
 } as const;
 
 export type GetHomeData200TodayWorkoutDay = {

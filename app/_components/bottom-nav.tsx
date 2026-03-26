@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import dayjs from "dayjs";
 
 interface BottomNavProps {
-  activePage?: "home" | "calendar" | "stats";
+  activePage?: "home" | "calendar" | "stats" | "profile";
 }
 
 export async function BottomNav({ activePage = "home" }: BottomNavProps) {
@@ -60,9 +60,16 @@ export async function BottomNav({ activePage = "home" }: BottomNavProps) {
           )}
         />
       </Link>
-      <button className="p-3">
-        <UserRound className="size-6 text-muted-foreground" />
-      </button>
+      <Link href="/profile" className="p-3">
+        <UserRound
+          className={cn(
+            "size-6",
+            activePage === "profile"
+              ? "text-foreground"
+              : "text-muted-foreground",
+          )}
+        />
+      </Link>
     </nav>
   );
 }
