@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { BottomNav } from "@/app/_components/bottom-nav";
 import { UpsertWorkoutSessionButton } from "./_components/upsert-workout-session-button";
 import ExerciseCard from "../../_components/excercise-card";
+import dayjs from "dayjs";
 
 const WEEKDAY_LABELS: Record<string, string> = {
   MONDAY: "SEGUNDA",
@@ -30,6 +31,16 @@ const WEEKDAY_TITLE_LABELS: Record<string, string> = {
   SUNDAY: "Domingo",
 };
 
+const WEEKDAY_INDEX: Record<string, number> = {
+  SUNDAY: 0,
+  MONDAY: 1,
+  TUESDAY: 2,
+  WEDNESDAY: 3,
+  THURSDAY: 4,
+  FRIDAY: 5,
+  SATURDAY: 6,
+};
+
 export default async function WorkoutDayPage({
   params,
 }: {
@@ -49,6 +60,8 @@ export default async function WorkoutDayPage({
 
   if (workoutDayData.status !== 200) redirect("/");
 
+  const today = dayjs().startOf("day");
+
   const {
     name,
     weekDay,
@@ -58,6 +71,9 @@ export default async function WorkoutDayPage({
     isRest,
     coverImageUrl,
   } = workoutDayData.data;
+
+  const dayDate = dayjs().day(WEEKDAY_INDEX[weekDay]).startOf("day");
+  const isFutureDay = dayDate.isAfter(today);
 
   if (isRest) {
     redirect(`/workout-plans/${workoutPlanId}`);
@@ -125,18 +141,46 @@ export default async function WorkoutDayPage({
                 </div>
               </div>
             </div>
-
-            {hasCompletedSession && (
-              <Button
-                variant="ghost"
-                disabled
-                className="rounded-full px-4 py-2 font-heading text-sm font-semibold text-background/70 hover:bg-transparent hover:text-background/70"
-              >
-                Concluído!
-              </Button>
-            )}
           </div>
         </div>
+      </div>
+
+      <div className="px-5 pt-5">
+        {!hasInProgressSession && !hasCompletedSession && !isFutureDay && (
+          <UpsertWorkoutSessionButton
+            workoutPlanId={workoutPlanId}
+            workoutDayId={dayId}
+          />
+        )}
+
+        {hasInProgressSession && !hasCompletedSession && (
+          <UpsertWorkoutSessionButton
+            workoutPlanId={workoutPlanId}
+            workoutDayId={dayId}
+            workoutSessionId={inProgressSession.id}
+          />
+        )}
+
+        {hasCompletedSession && (
+          <Button
+            variant="secondary"
+            disabled
+            className="w-full rounded-full py-3 font-heading text-sm font-semibold"
+          >
+            Treino concluído
+          </Button>
+        )}
+
+        {isFutureDay && (
+          <Button
+            variant="secondary"
+            disabled
+            className="w-full rounded-full py-3 font-heading text-sm font-semibold"
+          >
+            Este treino estará disponível na{" "}
+            {WEEKDAY_TITLE_LABELS[weekDay].toLowerCase()}
+          </Button>
+        )}
       </div>
 
       <div className="flex flex-col gap-3 px-5 pt-5">
@@ -150,25 +194,6 @@ export default async function WorkoutDayPage({
             />
           ))}
       </div>
-
-      {!hasInProgressSession && !hasCompletedSession && (
-        <div className="p-5">
-          <UpsertWorkoutSessionButton
-            workoutPlanId={workoutPlanId}
-            workoutDayId={dayId}
-          />
-        </div>
-      )}
-
-      {hasInProgressSession && !hasCompletedSession && (
-        <div className="p-5">
-          <UpsertWorkoutSessionButton
-            workoutPlanId={workoutPlanId}
-            workoutDayId={dayId}
-            workoutSessionId={inProgressSession.id}
-          />
-        </div>
-      )}
 
       <BottomNav activePage="calendar" />
     </div>
