@@ -93,9 +93,10 @@ export default async function WorkoutDayPage({
       <div className="flex items-center justify-between px-5 py-4">
         <BackButton />
         <h1 className="font-heading text-lg font-semibold text-foreground">
-          {hasInProgressSession || hasCompletedSession
-            ? "Treino de Hoje"
-            : WEEKDAY_TITLE_LABELS[weekDay]}
+          Treino de{" "}
+          {dayDate === today
+            ? "hoje"
+            : WEEKDAY_TITLE_LABELS[weekDay].toLowerCase()}
         </h1>
         <div className="size-6" />
       </div>
