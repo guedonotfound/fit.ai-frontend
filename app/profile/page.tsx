@@ -1,13 +1,14 @@
 import { redirect } from "next/navigation";
 import { authClient } from "../_lib/auth-client";
 import { headers } from "next/headers";
-import { getUserTrainData } from "../_lib/api/fetch-generated";
+import { getHomeData, getUserTrainData } from "../_lib/api/fetch-generated";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BicepsFlexed, CalendarDays, Ruler, Weight } from "lucide-react";
 import { LogoutButton } from "./_components/logout-button";
 import { BottomNav } from "../_components/bottom-nav";
 import GoalCard from "./_components/goal-card";
 import InfoCard from "./_components/info-card";
+import dayjs from "dayjs";
 
 export default async function ProfilePage() {
   const session = await authClient.getSession({
@@ -15,10 +16,18 @@ export default async function ProfilePage() {
   });
   if (!session.data?.user) redirect("/auth");
 
-  const trainData = await getUserTrainData();
+  const [trainData, homeData] = await Promise.all([
+    getUserTrainData(),
+    getHomeData(dayjs().format("YYYY-MM-DD")),
+  ]);
   if (trainData.status !== 200) {
     throw new Error("Failed to fetch user train data");
   }
+
+  const needsOnboarding =
+    (homeData.status === 200 && !homeData.data.activeWorkoutPlanId) ||
+    !trainData.data;
+  if (needsOnboarding) redirect("/onboarding");
 
   const user = session.data.user;
   const data = trainData.data;

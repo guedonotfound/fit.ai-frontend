@@ -1,14 +1,9 @@
 import Link from "next/link";
-import {
-  Calendar,
-  ChartNoAxesColumn,
-  House,
-  Sparkles,
-  UserRound,
-} from "lucide-react";
+import { Calendar, ChartNoAxesColumn, House, UserRound } from "lucide-react";
 import { getHomeData } from "../_lib/api/fetch-generated";
 import { cn } from "@/lib/utils";
 import dayjs from "dayjs";
+import { ChatOpenButton } from "./chat-open-button";
 
 interface BottomNavProps {
   activePage?: "home" | "calendar" | "stats" | "profile";
@@ -33,6 +28,7 @@ export async function BottomNav({ activePage = "home" }: BottomNavProps) {
           )}
         />
       </Link>
+
       {calendarHref ? (
         <Link href={calendarHref} className="p-3">
           <Calendar
@@ -47,9 +43,9 @@ export async function BottomNav({ activePage = "home" }: BottomNavProps) {
       ) : (
         <Calendar className="size-6 text-muted-foreground" />
       )}
-      <button className="rounded-full bg-primary p-4">
-        <Sparkles className="size-6 text-primary-foreground" />
-      </button>
+
+      <ChatOpenButton />
+
       <Link href="/stats" className="p-3">
         <ChartNoAxesColumn
           className={cn(
@@ -60,6 +56,7 @@ export async function BottomNav({ activePage = "home" }: BottomNavProps) {
           )}
         />
       </Link>
+
       <Link href="/profile" className="p-3">
         <UserRound
           className={cn(

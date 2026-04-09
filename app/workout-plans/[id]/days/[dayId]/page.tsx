@@ -1,4 +1,8 @@
-import { getWorkoutDay } from "@/app/_lib/api/fetch-generated";
+import {
+  getHomeData,
+  getUserTrainData,
+  getWorkoutDay,
+} from "@/app/_lib/api/fetch-generated";
 import { authClient } from "@/app/_lib/auth-client";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -56,7 +60,16 @@ export default async function WorkoutDayPage({
 
   const { id: workoutPlanId, dayId } = await params;
 
-  const workoutDayData = await getWorkoutDay(workoutPlanId, dayId);
+  const [workoutDayData, homeData, trainData] = await Promise.all([
+    getWorkoutDay(workoutPlanId, dayId),
+    getHomeData(dayjs().format("YYYY-MM-DD")),
+    getUserTrainData(),
+  ]);
+
+  const needsOnboarding =
+    (homeData.status === 200 && !homeData.data.activeWorkoutPlanId) ||
+    (trainData.status === 200 && !trainData.data);
+  if (needsOnboarding) redirect("/onboarding");
 
   if (workoutDayData.status !== 200) redirect("/");
 
